@@ -1,5 +1,10 @@
-
 package studentCoursesBackup.driver;
+
+import  studentCoursesBackup.util.Results;
+import  studentCoursesBackup.util.MyLogger;
+import  studentCoursesBackup.util.FileProcessor;
+import  studentCoursesBackup.myTree.tree;
+import  studentCoursesBackup.myTree.Node;
     
 /**
  * @author AuthorName
@@ -23,7 +28,63 @@ package studentCoursesBackup.driver;
 		    System.exit(0);
 	    } // end of if
 	    
-	    System.out.println("Hello World! Lets get started with the assignment");
+	  	String inputf = args[0];
+		String outputf = args[1];
+		String Debug = args[2];
 	    
+	    		int dbglvl = Integer.parseInt(Debug);
+		if(dbglvl <0 || dbglvl > 4){
+			System.out.println("Enter proper dbg option from 1 to 4 \n");
+			System.out.println("0:RELEASE, 1:SHOW ERROR IF ENCOUNTERED, 2:SHOW RESULT TO STDOUT 3:PRINT WHEN CHANGE IN STATE 4:PRINT WHENEVER CONSTRUCTOR IS CALLED \n");
+			System.exit(0);
+		}
+		else {
+
+			obj.setDebugValue(dbglvl);
+			System.out.println("debug level set to "+dbglvl);
+		}
+
+		String input;
+		ArrayList<String> store = new ArrayList<>();
+		FileProcessor fp = new FileProcessor(inputf);
+		while ((input = fp.readLine()) != null) {
+			{
+				store.add(input);
+			}
+		}
+
+		ArrayList<Node> node = new ArrayList<>();
+		tree trees = new tree(0);
+		int size = store.size();
+		for(int i=0; i<size; i++){
+			Node nodes = new Node();
+			node.add(nodes);
+		}
+
+		for(int i=0; i<store.size(); i++){
+			String str;
+			str = store.get(i);
+			String [] mystr = str.split(":");
+			Node check = new Node();
+				int elem = Integer.parseInt(mystr[0]);
+				check = trees.returnTreeList().get(0).SearchNode(elem);
+				if(check == null){
+					node.get(i).newNode(elem, mystr[1]);
+					trees.returnTreeList().get(0).insert(node.get(i));
+					Node bkpnode1 = node.get(i).clone(elem, mystr[1]);
+					Node bkpnode2 = node.get(i).clone(elem, mystr[1]);
+					trees.returnTreeList().get(1).insert(bkpnode1);
+					trees.returnTreeList().get(2).insert(bkpnode2);
+					node.get(i).registerObs(bkpnode1);
+					node.get(i).registerObs(bkpnode2);
+				} else {
+					System.out.println("nothing");
+				}
+				//System.out.println(mystr[j]);
+			}
+		trees.returnTreeList().get(0).inorderRec();
+		trees.returnTreeList().get(1).inorderRec();
+		trees.returnTreeList().get(2).inorderRec();
+
 	}  // end public static void main
     }  // end public class Driver
