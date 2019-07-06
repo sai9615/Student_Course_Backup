@@ -72,9 +72,6 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface {
 
         public void storeNewResult(String value){
             // System.out.println("stored the result : "+value);
-            if(value!= "\n") {
-                value = value + " ";
-            }
             result.add(value);
         }
 

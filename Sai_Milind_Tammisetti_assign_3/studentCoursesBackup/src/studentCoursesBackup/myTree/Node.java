@@ -11,11 +11,13 @@ public class Node implements observer, subject {
     int bkup=0; //0 for original node and 1 for backup node
 
     ArrayList<Node> listeners = new ArrayList<>();
+    ArrayList<String> courses = new ArrayList<>();
 
 
     public void newNode(int bno, String course) {
         this.bno = bno;
         this.course = course;
+        this.courses.add(course);
         this.left = null;
         this.right = null;
         this.bkup = 0;
@@ -24,14 +26,15 @@ public class Node implements observer, subject {
     public void bkpNode(int bno, String course){
         this.bno = bno;
         this.course = course;
+        this.courses.add(course);
         this.left = null;
         this.right = null;
         this.bkup = 1;
     }
 
-    public void notif(Node node){
+    public void notif(Node node, String course){
         for(Node nodes : listeners){
-            nodes.update(node);
+            nodes.update(node, course);
         }
     }
 
@@ -39,8 +42,15 @@ public class Node implements observer, subject {
         this.listeners.add(obs);
     }
 
-    public void update(Node node){
-        System.out.println();
+    public void update(Node node, String course){
+       String crs= course;
+       // System.out.println(node.getbno()+ " " +crs);
+        if(!courses.contains(crs)){
+            this.courses.add(crs);
+        }
+        if(this.bkup == 0){
+            this.notifyAll(node, course);
+        }
     }
 
     public int getbno(){

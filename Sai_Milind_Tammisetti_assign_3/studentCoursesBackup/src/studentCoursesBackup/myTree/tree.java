@@ -43,17 +43,17 @@ public class tree {
 
             /* Otherwise, recur down the tree */
             if (node.bno < root.bno)
-                root.left = insertRec(root.left, node);
+                root.left = this.insertRec(root.left, node);
             else if (node.bno > root.bno)
-                root.right = insertRec(root.right, node);
+                root.right = this.insertRec(root.right, node);
 
             /* return the (unchanged) node pointer */
             return root;
         }
 
         // This method mainly calls InorderRec()
-       public void inorderRec() {
-            this.display(root);
+       public void inorderRec(Results results) {
+            this.display(root, results);
         }
 
         public Node SearchNode(int bno){
@@ -105,11 +105,12 @@ public class tree {
     } */
 
     // A utility function to do inorder traversal of BST
-        public void display(Node root) {
+        public void display(Node root, Results results) {
             if (root != null) {
-                display(root.left);
+                display(root.getLeft(), results);
+                results.storeNewResult(Integer.toString(root.bno)+ " " +root.courses + "\n");
                 System.out.println(root.bno);
-                display(root.right);
+                display(root.getRight(),results);
             }
         }
 }

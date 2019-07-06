@@ -7,7 +7,7 @@ import  studentCoursesBackup.myTree.tree;
 import  studentCoursesBackup.myTree.Node;
     
 /**
- * @author AuthorName
+ * @author Sai Milind Tammisetti
  *
  */
     
@@ -22,17 +22,20 @@ import  studentCoursesBackup.myTree.Node;
 	     */
 
 	    // FIXME: update this if statement for this assignment
-	    if ( (args.length != 3) || args[0].equals("${arg0}") || args[1].equals("${arg1}") || args[2].equals("${arg2}")) {
+	    if ( (args.length != 5) || args[0].equals("${arg0}") || args[1].equals("${arg1}") || args[2].equals("${arg2}")|| args[3].equals("${arg3}")|| args[4].equals("${arg4}")) {
 		    
 		    System.err.println("Error: Incorrect number of arguments. Program accepts 6 argumnets.");
 		    System.exit(0);
 	    } // end of if
 	    
 	  	String inputf = args[0];
-		String outputf = args[1];
-		String Debug = args[2];
+		String outputf1 = args[1];
+		String outputf2 = args[2];
+		String outputf3 = args[3];
+		String Debug = args[4];
 	    
-	    		int dbglvl = Integer.parseInt(Debug);
+	    int dbglvl = Integer.parseInt(Debug);
+
 		if(dbglvl <0 || dbglvl > 4){
 			System.out.println("Enter proper dbg option from 1 to 4 \n");
 			System.out.println("0:RELEASE, 1:SHOW ERROR IF ENCOUNTERED, 2:SHOW RESULT TO STDOUT 3:PRINT WHEN CHANGE IN STATE 4:PRINT WHENEVER CONSTRUCTOR IS CALLED \n");
@@ -78,13 +81,23 @@ import  studentCoursesBackup.myTree.Node;
 					node.get(i).registerObs(bkpnode1);
 					node.get(i).registerObs(bkpnode2);
 				} else {
-					System.out.println("nothing");
+					check.update(check, mystr[1]);
 				}
 				//System.out.println(mystr[j]);
 			}
-		trees.returnTreeList().get(0).inorderRec();
-		trees.returnTreeList().get(1).inorderRec();
-		trees.returnTreeList().get(2).inorderRec();
+
+		Results res1 = new Results(outputf1);
+		trees.returnTreeList().get(0).inorderRec(res1);
+		res1.writeResults();
+		res1.closeMyFile();
+		Results res2 = new Results(outputf2);
+		trees.returnTreeList().get(1).inorderRec(res2);
+		res2.writeResults();
+		res2.closeMyFile();
+		Results res3 = new Results(outputf3);
+		trees.returnTreeList().get(2).inorderRec(res3);
+		res3.writeResults();
+		res3.closeMyFile();
 
 	}  // end public static void main
     }  // end public class Driver
