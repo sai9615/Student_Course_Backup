@@ -3,7 +3,7 @@ package studentCoursesBackup.driver;
 import  studentCoursesBackup.util.Results;
 import  studentCoursesBackup.util.MyLogger;
 import  studentCoursesBackup.util.FileProcessor;
-import  studentCoursesBackup.myTree.tree;
+import  studentCoursesBackup.util.TreeBuilder;
 import  studentCoursesBackup.myTree.Node;
     
 /**
@@ -57,7 +57,7 @@ import  studentCoursesBackup.myTree.Node;
 		}
 
 		ArrayList<Node> node = new ArrayList<>();
-		tree trees = new tree(0);
+		TreeBuilder trees = new TreeBuilder(0);
 		int size = store.size();
 		for(int i=0; i<size; i++){
 			Node nodes = new Node();

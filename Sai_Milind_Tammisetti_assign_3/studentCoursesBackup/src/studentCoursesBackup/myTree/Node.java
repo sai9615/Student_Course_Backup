@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 public class Node implements observer, subject {
 
-    int bno;
-    String course;
-    Node left;
-    Node right;
-    int bkup=0; //0 for original node and 1 for backup node
+    public int bno;
+    public String course;
+    public Node left;
+    public Node right;
+    public int bkup=0; //0 for original node and 1 for backup node
 
     ArrayList<Node> listeners = new ArrayList<>();
-    ArrayList<String> courses = new ArrayList<>();
+    public ArrayList<String> courses = new ArrayList<>();
 
 
     public void newNode(int bno, String course) {

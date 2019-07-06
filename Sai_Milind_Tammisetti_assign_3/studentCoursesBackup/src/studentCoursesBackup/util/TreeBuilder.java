@@ -1,30 +1,31 @@
-package studentCoursesBackup.myTree;
+package studentCoursesBackup.util;
 
 import java.util.ArrayList;
+import studentCoursesBackup.myTree.Node;
 
 //code borrowed from https://www.geeksforgeeks.org/iterative-searching-binary-search-tree/
 
-public class tree {
+public class TreeBuilder {
 
         /* Class containing left and right child of current node and key value*/
 
         // Root of BST
         Node root;
-        ArrayList<tree> mytrees = new ArrayList<>();
+        ArrayList<TreeBuilder> mytrees = new ArrayList<>();
 
         // Constructor
-       public tree(int parent) {
+       public TreeBuilder(int parent) {
            if(parent == 0){
             root = null;
             mytrees.add(this);
-            mytrees.add(new tree(1));
-            mytrees.add(new tree(1));
+            mytrees.add(new TreeBuilder(1));
+            mytrees.add(new TreeBuilder(1));
         } else {
             root = null;
            }
        }
 
-        public ArrayList<tree> returnTreeList(){
+        public ArrayList<TreeBuilder> returnTreeList(){
            return mytrees;
         }
         // This method mainly calls insertRec()
