@@ -1,5 +1,5 @@
 package studentCoursesBackup.myTree;
 
 public interface observer {
-    public void update(Node obs);
+    public void update(Node obs, String course);
 }

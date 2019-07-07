@@ -5,6 +5,7 @@ import  studentCoursesBackup.util.MyLogger;
 import  studentCoursesBackup.util.FileProcessor;
 import  studentCoursesBackup.util.TreeBuilder;
 import  studentCoursesBackup.myTree.Node;
+import java.util.ArrayList;
     
 /**
  * @author Sai Milind Tammisetti
@@ -22,19 +23,22 @@ import  studentCoursesBackup.myTree.Node;
 	     */
 
 	    // FIXME: update this if statement for this assignment
-	    if ( (args.length != 5) || args[0].equals("${arg0}") || args[1].equals("${arg1}") || args[2].equals("${arg2}")|| args[3].equals("${arg3}")|| args[4].equals("${arg4}")) {
+	    if ( (args.length != 6) || args[0].equals("${arg0}") || args[1].equals("${arg1}") || args[2].equals("${arg2}")|| args[3].equals("${arg3}")|| args[4].equals("${arg4}") || args[5].equals("${arg5}")) {
 		    
 		    System.err.println("Error: Incorrect number of arguments. Program accepts 6 argumnets.");
 		    System.exit(0);
 	    } // end of if
 	    
 	  	String inputf = args[0];
-		String outputf1 = args[1];
-		String outputf2 = args[2];
-		String outputf3 = args[3];
-		String Debug = args[4];
-	    
-	    int dbglvl = Integer.parseInt(Debug);
+	  	String deletef = args[1];
+		String outputf1 = args[2];
+		String outputf2 = args[3];
+		String outputf3 = args[4];
+		String Debug = args[5];
+	   
+	   MyLogger obj = new MyLogger(); 
+	   
+	   int dbglvl = Integer.parseInt(Debug);
 
 		if(dbglvl <0 || dbglvl > 4){
 			System.out.println("Enter proper dbg option from 1 to 4 \n");
@@ -69,10 +73,12 @@ import  studentCoursesBackup.myTree.Node;
 			str = store.get(i);
 			String [] mystr = str.split(":");
 			Node check = new Node();
+			Node test = new Node();
 				int elem = Integer.parseInt(mystr[0]);
+				test.newNode(elem, mystr[1], test.operation.INSERT);
 				check = trees.returnTreeList().get(0).SearchNode(elem);
 				if(check == null){
-					node.get(i).newNode(elem, mystr[1]);
+					node.get(i).newNode(elem, mystr[1], test.operation.INSERT);
 					trees.returnTreeList().get(0).insert(node.get(i));
 					Node bkpnode1 = node.get(i).clone(elem, mystr[1]);
 					Node bkpnode2 = node.get(i).clone(elem, mystr[1]);
@@ -83,8 +89,29 @@ import  studentCoursesBackup.myTree.Node;
 				} else {
 					check.update(check, mystr[1]);
 				}
-				//System.out.println(mystr[j]);
 			}
+
+		String inputs;
+		ArrayList<String> stores = new ArrayList<>();
+		FileProcessor fps = new FileProcessor(deletef);
+		while ((inputs = fps.readLine()) != null) {
+			{
+				stores.add(inputs);
+			}
+		}
+		for(int i=0; i<stores.size(); i++){
+			String str;
+			str = stores.get(i);
+			String [] mystr = str.split(":");
+			Node check = new Node();
+			Node test = new Node();
+			int elem = Integer.parseInt(mystr[0]);
+			test.newNode(elem, mystr[1], test.operation.DELETE);
+			check = trees.returnTreeList().get(0).SearchNode(elem);
+			if(check != null){
+				check.update(test, mystr[1]);
+			}
+		}	
 
 		Results res1 = new Results(outputf1);
 		trees.returnTreeList().get(0).inorderRec(res1);
