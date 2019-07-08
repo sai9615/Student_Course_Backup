@@ -13,8 +13,12 @@ public class TreeBuilder {
         Node root;
         ArrayList<TreeBuilder> mytrees = new ArrayList<>();
 
-        // Constructor
+        /**
+        * Constructor, used to create the arraylist of trees for original node and two backup nodes.
+        * @param node
+        */
        public TreeBuilder(int parent) {
+       MyLogger.writeMessage("In constructor "+ getClass().getName(), MyLogger.DebugLevel.CONSTRUCTOR);
            if(parent == 0){
             root = null;
             mytrees.add(this);
@@ -25,15 +29,29 @@ public class TreeBuilder {
            }
        }
 
+        /**
+        * Used to return the tree list
+        * @param node
+        * @return the arraylist of trees.
+        */
         public ArrayList<TreeBuilder> returnTreeList(){
            return mytrees;
         }
-        // This method mainly calls insertRec()
+
+        /**
+        * This method mainly calls insertRec()
+        * @param node
+        */
        public void insert(Node node) {
             root = insertRec(root, node);
         }
 
-        /* A recursive function to insert a new key in BST */
+        /**
+        * A recursive function to insert a new key in BST.
+        * @param root
+        * @param node
+        * @return return the (unchanged) node pointer.
+        */
         Node insertRec(Node root, Node node) {
 
             /* If the tree is empty, return a new node */
@@ -52,11 +70,19 @@ public class TreeBuilder {
             return root;
         }
 
-        // This method mainly calls InorderRec()
+        /**
+        * This method mainly calls printNodes()
+        * @param results
+        */ 
        public void inorderRec(Results results) {
-            this.display(root, results);
+            this.printNodes(root, results);
         }
 
+        /**
+        * This method returns a node given it's bnumber.
+        * @param bno
+        * @return the node with the particular bnumber.
+        */ 
         public Node SearchNode(int bno){
             Node tmp = root;
             while (tmp!= null){
@@ -71,47 +97,17 @@ public class TreeBuilder {
             return null;
         }
 
-  /*  void deleteKey(int key)
-    {
-        root = deleteRec(root, key);
-    }
-
-    /* A recursive function to insert a new key in BST */
-  /*  Node deleteRec(Node root, int key)
-    {
-
-        if (root == null)  return root;
-
-
-        if (key < root.key)
-            root.left = deleteRec(root.left, key);
-        else if (key > root.key)
-            root.right = deleteRec(root.right, key);
-
-
-        else
-        {
-
-            if (root.left == null)
-                return root.right;
-            else if (root.right == null)
-                return root.left;
-
-
-            root.key = minValue(root.right);
-
-            root.right = deleteRec(root.right, root.key);
-        }
-        return root;
-    } */
-
-    // A utility function to do inorder traversal of BST
-        public void display(Node root, Results results) {
+        /**
+        * A utility function to do inorder traversal of BST and store the results.
+        * @param root
+        * @param results
+        */ 
+        public void printNodes(Node root, Results results) {
             if (root != null) {
-                display(root.getLeft(), results);
-                results.storeNewResult(Integer.toString(root.bno)+ " " +root.courses + "\n");
-                System.out.println(root.bno);
-                display(root.getRight(),results);
+                printNodes(root.getLeft(), results);
+                results.storeNewResult(root.bno + " " + root.courses + "\n");
+                MyLogger.writeMessage(root.bno + " " + root.courses + "\n", MyLogger.DebugLevel.RESULT);
+                printNodes(root.getRight(),results);
             }
         }
 }

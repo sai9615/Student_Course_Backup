@@ -51,6 +51,8 @@ import java.util.ArrayList;
 			System.out.println("debug level set to "+dbglvl);
 		}
 
+		//Read the input.txt
+
 		String input;
 		ArrayList<String> store = new ArrayList<>();
 		FileProcessor fp = new FileProcessor(inputf);
@@ -67,6 +69,8 @@ import java.util.ArrayList;
 			Node nodes = new Node();
 			node.add(nodes);
 		}
+
+		//Create nodes and update the courses if node already exsists.		
 
 		for(int i=0; i<store.size(); i++){
 			String str;
@@ -91,6 +95,8 @@ import java.util.ArrayList;
 				}
 			}
 
+		//Read the delete.txt file 
+
 		String inputs;
 		ArrayList<String> stores = new ArrayList<>();
 		FileProcessor fps = new FileProcessor(deletef);
@@ -99,6 +105,9 @@ import java.util.ArrayList;
 				stores.add(inputs);
 			}
 		}
+
+		//Remove the courses according to delete.txt
+
 		for(int i=0; i<stores.size(); i++){
 			String str;
 			str = stores.get(i);
@@ -112,6 +121,8 @@ import java.util.ArrayList;
 				check.update(test, mystr[1]);
 			}
 		}	
+
+		//Store the results in respective output files.
 
 		Results res1 = new Results(outputf1);
 		trees.returnTreeList().get(0).inorderRec(res1);

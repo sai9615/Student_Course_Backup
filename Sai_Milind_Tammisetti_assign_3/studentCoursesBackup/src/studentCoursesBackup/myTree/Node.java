@@ -15,7 +15,12 @@ public class Node implements observer, subject {
     public enum keys {INSERT , DELETE }
     public keys operation;
 
-
+    /**
+    * Used to create a new node.
+    * @param bno
+    * @param course
+    * @param ops
+    */
     public void newNode(int bno, String course, keys ops) {
         this.bno = bno;
         this.course = course;
@@ -26,6 +31,12 @@ public class Node implements observer, subject {
         this.operation = ops;
     }
 
+    /**
+    * Used for creating backup nodes.
+    * @param bno
+    * @param course
+    * @param ops
+    */
     public void bkpNode(int bno, String course, keys ops){
         this.bno = bno;
         this.course = course;
@@ -36,16 +47,30 @@ public class Node implements observer, subject {
         this.operation = ops;
     }
 
+    /**
+    * Used to notify all the backup nodes about the update.
+    * @param node
+    * @param course
+    */
     public void notifyAll(Node node, String course){
         for(Node nodes : listeners){
             nodes.update(node, course);
         }
     }
 
+    /**
+    * Used to register the observer.
+    * @param obs
+    */
     public  void registerObs(Node obs){
         this.listeners.add(obs);
     }
 
+    /**
+    * Used to update the original node as well as the backup nodes.
+    * @param node
+    * @param course
+    */
     public void update(Node node, String course){
        String crs= course;
        // System.out.println(node.getbno()+ " " +crs);
@@ -59,22 +84,44 @@ public class Node implements observer, subject {
         }
     }
 
+    /**
+    * Used to get the bnumber of the node.
+    * @return the bnumber of the node
+    */
     public int getbno(){
         return this.bno;
     }
 
+    /**
+    * Used to get the left node of the particular node.
+    * @return the left node.
+    */
     public Node getLeft(){
         return this.left;
     }
 
+    /**
+    * Used to get the right node of the particular node.
+    * @return the right node.
+    */
     public Node getRight(){
         return this.right;
     }
 
+    /**
+    * Used to get the enum value of the node.
+    * @return the enum value.
+    */
     public keys getOperation() {
         return this.operation;
     }
 
+    /**
+    * Used for creating clone of the node calling this method.
+    * @param bno
+    * @param course
+    * @return the cloned node.
+    */
     public Node clone(int bno, String course){
         Node node = new Node();
         node.bkpNode(bno, course, node.operation.INSERT);

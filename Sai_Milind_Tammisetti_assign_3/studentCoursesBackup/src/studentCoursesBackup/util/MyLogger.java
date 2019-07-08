@@ -9,7 +9,7 @@ public class MyLogger{
       DEBUG_VALUE=0 [No output should be printed from the applicatio to stdout. It is ok to write to the output file though" ]
     */
 
-    public static enum DebugLevel {RELEASE, ERROR , RESULT, STATE, CONSTRUCTOR
+    public static enum DebugLevel {RELEASE, ERROR , CONSTRUCTOR, STATE, RESULT
                                    };
 
     private static DebugLevel debugLevel;
