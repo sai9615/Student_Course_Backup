@@ -32,7 +32,7 @@ Example:
 
 The last argument is the Logger value. 
 
-ant -buildfile src/build.xml run -Darg0=input.txt -Darg1=delete.txt -Darg2=output1.txt -Darg3=output2.txt -Darg4=output3.txt -Darg5=4
+ant -buildfile studentCoursesBackup/src/build.xml run -Darg0=input.txt -Darg1=delete.txt -Darg2=output1.txt -Darg3=output2.txt -Darg4=output3.txt -Darg5=4
 
 -----------------------------------------------------------------------
 ## Description: 
